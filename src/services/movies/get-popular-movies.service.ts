@@ -26,15 +26,16 @@ export type TMoviesResponse = {
 
 export const getPopularMovies = async (
   page = 1,
-  language = 'pt-BR'
+  language = 'pt-BR',
+  searchQuery?: string
 ): Promise<TMoviesResponse | undefined> => {
   try {
-    const response = await api.get('/movie/popular', {
-      params: {
-        page,
-        language
-      }
-    });
+    const endpoint = !!searchQuery ? '/search/movie' : '/movie/popular';
+    const params = !!searchQuery
+      ? { query: searchQuery, page, language }
+      : { page, language };
+
+    const response = await api.get(endpoint, { params });
     return response.data;
   } catch (error) {
     console.error(error);

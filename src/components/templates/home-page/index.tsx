@@ -9,13 +9,15 @@ import { useState } from 'react';
 import { TMovie } from '@/services/movies/get-popular-movies.service';
 
 export const HomePage = () => {
+  const [search, setSearch] = useState('');
   const [currentPage, setCurrentPage] = useState(1);
   const [selectedMovie, setSelectedMovie] = useState<TMovie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const { data: movies, isPending: loadingMovies } = useGetPopularMovies(
     currentPage,
-    'pt-BR'
+    'pt-BR',
+    search
   );
 
   return (
@@ -28,6 +30,8 @@ export const HomePage = () => {
         <SearchBar
           label="Pesquise por um filme"
           placeholder="Escreva o nome de um filme"
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
         />
       </div>
 
