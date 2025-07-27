@@ -1,6 +1,7 @@
 'use client';
 
 import { SearchBar } from '@/components/atoms/search-bar';
+import { LoadingMovies } from './components/loading-movies';
 import { MovieCard } from '@/components/molecules/movie-card';
 import { MovieModal } from '@/components/molecules/movie-modal';
 import { useGetPopularMovies } from '@/hooks/service-hooks/movies/use-get-popular-movies.hook';
@@ -17,30 +18,6 @@ export const HomePage = () => {
     'pt-BR'
   );
 
-  const handleMovieClick = (movie: TMovie) => {
-    setSelectedMovie(movie);
-    setIsModalOpen(true);
-  };
-
-  const handleCloseModal = () => {
-    setIsModalOpen(false);
-    setSelectedMovie(null);
-  };
-
-  if (loadingMovies) {
-    return (
-      <div className="pt-10">
-        <SearchBar
-          label="Pesquise por um filme"
-          placeholder="Escreva o nome de um filme"
-        />
-        <div className="mt-8 flex justify-center">
-          <div className="text-lg text-gray-600">Carregando filmes...</div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="pt-10">
       <div className="mb-8">
@@ -54,12 +31,23 @@ export const HomePage = () => {
         />
       </div>
 
+      {loadingMovies && (
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+          {Array.from({ length: 10 }).map((_, index) => (
+            <LoadingMovies key={index} />
+          ))}
+        </div>
+      )}
+
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {movies?.results.map((movie) => (
           <MovieCard
             key={movie.id}
             movie={movie}
-            onClick={() => handleMovieClick(movie)}
+            onClick={() => {
+              setSelectedMovie(movie);
+              setIsModalOpen(true);
+            }}
           />
         ))}
       </div>
@@ -73,7 +61,10 @@ export const HomePage = () => {
       <MovieModal
         movie={selectedMovie}
         isOpen={isModalOpen}
-        onClose={handleCloseModal}
+        onClose={() => {
+          setIsModalOpen(false);
+          setSelectedMovie(null);
+        }}
       />
     </div>
   );
