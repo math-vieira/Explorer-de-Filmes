@@ -1,6 +1,7 @@
 'use client';
 
 import { SearchBar } from '@/components/atoms/search-bar';
+import { ErrorMessage } from '@/components/atoms/error-message';
 import { LoadingMovies } from './components/loading-movies';
 import { MovieCard } from '@/components/molecules/movie-card';
 import { MovieModal } from '@/components/molecules/movie-modal';
@@ -18,11 +19,12 @@ export const HomePage = () => {
 
   const debouncedSearch = useDebounce(search, 500);
 
-  const { data: movies, isPending: loadingMovies } = useGetPopularMovies(
-    currentPage,
-    'pt-BR',
-    debouncedSearch
-  );
+  const {
+    data: movies,
+    isPending: loadingMovies,
+    error,
+    refetch
+  } = useGetPopularMovies(currentPage, 'pt-BR', debouncedSearch);
 
   return (
     <div className="pt-10">
@@ -47,23 +49,27 @@ export const HomePage = () => {
         </div>
       )}
 
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {movies?.results.map((movie) => (
-          <MovieCard
-            key={movie.id}
-            movie={movie}
-            onClick={() => {
-              setSelectedMovie(movie);
-              setIsModalOpen(true);
-            }}
-          />
-        ))}
-      </div>
+      {!error && !loadingMovies && (
+        <>
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+            {movies?.results.map((movie) => (
+              <MovieCard
+                key={movie.id}
+                movie={movie}
+                onClick={() => {
+                  setSelectedMovie(movie);
+                  setIsModalOpen(true);
+                }}
+              />
+            ))}
+          </div>
 
-      {movies?.results.length === 0 && (
-        <div className="mt-8 text-center text-gray-600">
-          Nenhum filme encontrado.
-        </div>
+          {movies?.results.length === 0 && (
+            <div className="mt-8 text-center text-gray-600">
+              Nenhum filme encontrado.
+            </div>
+          )}
+        </>
       )}
 
       <Pagination
@@ -79,6 +85,13 @@ export const HomePage = () => {
           onClose={() => {
             setIsModalOpen(false);
           }}
+        />
+      )}
+
+      {error && (
+        <ErrorMessage
+          message="Erro ao carregar os filmes. Verifique sua conexão e tente novamente."
+          onRetry={refetch}
         />
       )}
     </div>
