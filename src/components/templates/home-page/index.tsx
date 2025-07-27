@@ -72,14 +72,15 @@ export const HomePage = () => {
         onPageChange={setCurrentPage}
       />
 
-      <MovieModal
-        movie={selectedMovie}
-        isOpen={isModalOpen}
-        onClose={() => {
-          setIsModalOpen(false);
-          setSelectedMovie(null);
-        }}
-      />
+      {selectedMovie && (
+        <MovieModal
+          movie={selectedMovie}
+          isOpen={isModalOpen}
+          onClose={() => {
+            setIsModalOpen(false);
+          }}
+        />
+      )}
     </div>
   );
 };

@@ -1,7 +1,7 @@
 import { TMovie } from '@/services/movies/get-popular-movies.service';
 
 export type MovieModalProps = {
-  movie: TMovie | null;
+  movie: TMovie;
   isOpen: boolean;
   onClose: () => void;
 };

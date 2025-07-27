@@ -9,8 +9,6 @@ import Image from 'next/image';
 import { MovieModalProps } from './movie-modal.types';
 
 export const MovieModal = ({ movie, isOpen, onClose }: MovieModalProps) => {
-  if (!movie) return null;
-
   const imageUrl = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
 
   const formatDate = (dateString: string) => {
