@@ -1,4 +1,4 @@
-import { api } from '..';
+import { getPopularMovies as getPopularMoviesServer } from '../server-services/get-popular-movies.server-service';
 
 export type TMovie = {
   adult: boolean;
@@ -30,13 +30,7 @@ export const getPopularMovies = async (
   searchQuery?: string
 ): Promise<TMoviesResponse | undefined> => {
   try {
-    const endpoint = !!searchQuery ? '/search/movie' : '/movie/popular';
-    const params = !!searchQuery
-      ? { query: searchQuery, page, language }
-      : { page, language };
-
-    const response = await api.get(endpoint, { params });
-    return response.data;
+    return await getPopularMoviesServer(page, language, searchQuery);
   } catch (error) {
     console.error(error);
     throw error;
