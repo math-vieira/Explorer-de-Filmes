@@ -2,10 +2,6 @@ import Image from 'next/image';
 import { MovieCardProps } from './movie-card.types';
 
 export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
-  const imageUrl = movie.poster_path
-    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-    : '/placeholder-movie.jpg';
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
   };
@@ -26,13 +22,22 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
       aria-label={`Ver detalhes do filme ${movie.title}`}
     >
       <div className="relative">
-        <Image
-          src={imageUrl}
-          alt={movie.title}
-          width={300}
-          height={450}
-          className="h-auto w-full object-cover"
-        />
+        {movie.poster_path ? (
+          <Image
+            src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+            alt={movie.title}
+            width={300}
+            height={450}
+            className="h-auto w-full object-cover"
+          />
+        ) : (
+          <div className="flex h-[450px] w-full items-center justify-center bg-gray-200">
+            <div className="text-center">
+              <div className="mx-auto mb-2 text-6xl text-gray-400">🎬</div>
+              <p className="text-sm text-gray-500">Sem poster</p>
+            </div>
+          </div>
+        )}
         <div className="absolute top-2 right-2 rounded-full bg-yellow-400 px-2 py-1 text-sm font-bold text-black">
           ⭐ {movie.vote_average.toFixed(1)}
         </div>

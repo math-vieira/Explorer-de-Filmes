@@ -9,8 +9,6 @@ import Image from 'next/image';
 import { MovieModalProps } from './movie-modal.types';
 
 export const MovieModal = ({ movie, isOpen, onClose }: MovieModalProps) => {
-  const imageUrl = `https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`;
-
   const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('pt-BR');
   };
@@ -26,12 +24,21 @@ export const MovieModal = ({ movie, isOpen, onClose }: MovieModalProps) => {
 
         <div className="space-y-6">
           <div className="relative h-64 w-full overflow-hidden rounded-lg">
-            <Image
-              src={imageUrl}
-              alt={movie.title}
-              fill
-              className="object-cover"
-            />
+            {movie.backdrop_path ? (
+              <Image
+                src={`https://image.tmdb.org/t/p/w1280${movie.backdrop_path}`}
+                alt={movie.title}
+                fill
+                className="object-cover"
+              />
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-gray-200">
+                <div className="text-center">
+                  <div className="mx-auto mb-2 text-4xl text-gray-400">🎬</div>
+                  <p className="text-sm text-gray-500">Sem imagem de fundo</p>
+                </div>
+              </div>
+            )}
             <div className="absolute inset-0 bg-black/20" />
           </div>
 
