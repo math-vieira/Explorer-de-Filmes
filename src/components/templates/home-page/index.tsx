@@ -2,15 +2,30 @@
 
 import { SearchBar } from '@/components/atoms/search-bar';
 import { MovieCard } from '@/components/molecules/movie-card';
+import { MovieModal } from '@/components/molecules/movie-modal';
 import { useGetPopularMovies } from '@/hooks/service-hooks/movies/use-get-popular-movies.hook';
 import { useState } from 'react';
+import { TMovie } from '@/services/movies/get-popular-movies.service';
 
 export const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
+  const [selectedMovie, setSelectedMovie] = useState<TMovie | null>(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
   const { data: movies, isPending: loadingMovies } = useGetPopularMovies(
     currentPage,
     'pt-BR'
   );
+
+  const handleMovieClick = (movie: TMovie) => {
+    setSelectedMovie(movie);
+    setIsModalOpen(true);
+  };
+
+  const handleCloseModal = () => {
+    setIsModalOpen(false);
+    setSelectedMovie(null);
+  };
 
   if (loadingMovies) {
     return (
@@ -41,7 +56,11 @@ export const HomePage = () => {
 
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {movies?.results.map((movie) => (
-          <MovieCard key={movie.id} movie={movie} />
+          <MovieCard
+            key={movie.id}
+            movie={movie}
+            onClick={() => handleMovieClick(movie)}
+          />
         ))}
       </div>
 
@@ -50,6 +69,12 @@ export const HomePage = () => {
           Nenhum filme encontrado.
         </div>
       )}
+
+      <MovieModal
+        movie={selectedMovie}
+        isOpen={isModalOpen}
+        onClose={handleCloseModal}
+      />
     </div>
   );
 };

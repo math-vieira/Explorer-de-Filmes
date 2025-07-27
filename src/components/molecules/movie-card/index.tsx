@@ -1,11 +1,7 @@
 import Image from 'next/image';
-import { TMovie } from '@/types/movie.types';
+import { MovieCardProps } from './movie-card.types';
 
-interface MovieCardProps {
-  movie: TMovie;
-}
-
-export const MovieCard = ({ movie }: MovieCardProps) => {
+export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
   const imageUrl = movie.poster_path
     ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
     : '/placeholder-movie.jpg';
@@ -15,7 +11,10 @@ export const MovieCard = ({ movie }: MovieCardProps) => {
   };
 
   return (
-    <div className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+    <div
+      className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg"
+      onClick={onClick}
+    >
       <div className="relative">
         <Image
           src={imageUrl}
