@@ -6,9 +6,12 @@ import { useState } from 'react';
 
 export const HomePage = () => {
   const [currentPage, setCurrentPage] = useState(1);
-  const movies = useGetPopularMovies(currentPage, 'pt-BR');
+  const { data: movies, isPending: loadingMovies } = useGetPopularMovies(
+    currentPage,
+    'pt-BR'
+  );
 
-  console.log(movies.data);
+  console.log(movies);
 
   return (
     <div className="pt-10">
