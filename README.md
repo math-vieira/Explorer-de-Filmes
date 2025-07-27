@@ -1,37 +1,229 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Movies Explorer
 
-## Getting Started
+Uma aplicação moderna para explorar filmes populares, construída com Next.js, TypeScript e integração com a API do TMDB.
 
-First, run the development server:
+![Movies Explorer](https://img.shields.io/badge/Next.js-15.4.4-black?style=for-the-badge&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3.4-38B2AC?style=for-the-badge&logo=tailwind-css)
+![Playwright](https://img.shields.io/badge/Playwright-1.40-green?style=for-the-badge&logo=playwright)
+![Storybook](https://img.shields.io/badge/Storybook-9.0-FF4785?style=for-the-badge&logo=storybook)
+
+## ✨ Funcionalidades
+
+- 🎯 **Busca de filmes** com debounce para otimização
+- 📱 **Design responsivo** com Tailwind CSS
+- 🎨 **Interface moderna** com shadcn/ui
+- 🔍 **Paginação** para navegar pelos resultados
+- 📊 **Detalhes completos** dos filmes em modal
+- ♿ **Acessibilidade** com navegação por teclado
+- 🛡️ **Error boundaries** para tratamento de erros
+- 🎭 **Loading states** com skeletons
+- 📚 **Documentação** com Storybook
+- 🧪 **Testes E2E** com Playwright
+
+## 🚀 Tecnologias
+
+- **Framework:** Next.js 15.4.4
+- **Linguagem:** TypeScript
+- **Estilização:** Tailwind CSS
+- **UI Components:** shadcn/ui
+- **Gerenciamento de Estado:** React Query (TanStack Query)
+- **Testes E2E:** Playwright
+- **Documentação:** Storybook
+- **API:** TMDB (The Movie Database)
+- **Package Manager:** pnpm
+
+## 📋 Pré-requisitos
+
+- Node.js 18+
+- pnpm (recomendado) ou npm
+- Conta na [TMDB](https://www.themoviedb.org/) para API key
+
+## 🛠️ Instalação
+
+### 1. Clone o repositório
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+git clone https://github.com/ymath-xyz/Explorer-de-Filmes
+cd Explorer-de-Filmes
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### 2. Instale as dependências
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+pnpm install
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+### 3. Configure as variáveis de ambiente
 
-## Learn More
+Crie um arquivo `.env` na raiz do projeto:
 
-To learn more about Next.js, take a look at the following resources:
+```env
+NEXT_PUBLIC_API_URL=https://api.themoviedb.org/3
+NEXT_PUBLIC_API_KEY=sua_api_key_aqui
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+**Como obter a API key:**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Acesse [TMDB](https://www.themoviedb.org/)
+2. Crie uma conta ou faça login
+3. Vá em Settings > API
+4. Solicite uma API key
+5. Copie a chave e cole no `.env`
+
+### 4. Execute a aplicação
+
+```bash
+pnpm run dev
+```
+
+A aplicação estará disponível em `http://localhost:3000`
+
+## 🧪 Testes
+
+### Testes E2E com Playwright
+
+#### Instalar dependências do Playwright (primeira vez)
+
+```bash
+npx playwright install
+```
+
+#### Executar testes
+
+```bash
+# Executar testes com interface gráfica
+pnpm run test:ui
+
+# Executar testes específicos
+pnpm run test:components
+pnpm run test:accessibility
+pnpm run test:home-page
+```
+
+#### Tipos de Testes
+
+- **`tests/home-page.spec.ts`** - Funcionalidades da página principal
+- **`tests/components.spec.ts`** - Componentes individuais
+- **`tests/accessibility.spec.ts`** - Testes de acessibilidade
+
+## 📚 Storybook
+
+### Instalar dependências (se necessário)
+
+```bash
+pnpm install
+```
+
+### Executar Storybook
+
+```bash
+pnpm run storybook
+```
+
+O Storybook estará disponível em `http://localhost:6006`
+
+### Estrutura das Stories
+
+```
+src/components/
+├── atoms/
+│   ├── button/button.stories.tsx
+│   └── search-bar/search-bar.stories.tsx
+├── molecules/
+│   ├── movie-card/movie-card.stories.tsx
+│   ├── movie-modal/movie-modal.stories.tsx
+│   ├── header/header.stories.tsx
+│   └── footer/footer.stories.tsx
+└── templates/
+    └── home-page/
+        └── components/
+            ├── pagination/pagination.stories.tsx
+            └── loading-movies/loading-movies.stories.tsx
+```
+
+## 🏗️ Arquitetura
+
+O projeto segue o **Atomic Design** para organização dos componentes:
+
+### Atoms
+
+- `Button` - Botão reutilizável
+- `SearchBar` - Barra de pesquisa
+- `ErrorMessage` - Mensagens de erro
+- `CentralizerSection` - Container centralizado
+
+### Molecules
+
+- `MovieCard` - Card de filme
+- `MovieModal` - Modal com detalhes
+- `Header` - Cabeçalho da aplicação
+- `Footer` - Rodapé da aplicação
+
+### Templates
+
+- `HomePage` - Página principal
+- `Pagination` - Navegação de páginas
+- `LoadingMovies` - Estado de carregamento
+
+## 🎨 Funcionalidades Principais
+
+### Busca de Filmes
+
+- Pesquisa em tempo real com debounce
+- Integração com API do TMDB
+- Resultados paginados
+
+### Interface
+
+- Design responsivo
+- Animações suaves
+- Estados de loading
+
+## 🔧 Scripts Disponíveis
+
+```bash
+# Desenvolvimento
+pnpm dev          # Inicia servidor de desenvolvimento
+pnpm build        # Build para produção
+pnpm start        # Inicia servidor de produção
+
+# Testes
+pnpm test:ui      # Executa testes com interface
+
+# Storybook
+pnpm storybook    # Inicia Storybook
+
+# Linting
+pnpm lint         # Executa ESLint
+```
+
+## 🌟 Características Técnicas
+
+### Performance
+
+- **Server Actions** para operações no servidor
+- **React Query** para cache e sincronização
+- **Image Optimization** com Next.js
+- **Code Splitting** automático (NextJS faz isso com o roteamento)
+
+### Segurança
+
+- **API keys** no servidor, para que a API não fique visível a cada request (server action).
+
+## 📝 Licença
+
+Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para mais detalhes.
 
 ## Deploy on Vercel
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- VERCEL: [movies explorer](https://explorer-de-filmes.vercel.app/)
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# test
+## Métricas recolhidas a partir do Speed Insights da própria vercel
+
+## 👨‍💻 Autor
+
+**Matheus Vieira**
+
+- GitHub: [@ymath-xyz](https://github.com/ymath-xyz)
+- LinkedIn: [ymath-silva](https://www.linkedin.com/in/ymath-silva/)
