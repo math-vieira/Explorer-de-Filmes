@@ -220,6 +220,8 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 - VERCEL: [movies explorer](https://explorer-de-filmes.vercel.app/)
 
 ## Métricas recolhidas a partir do Speed Insights da própria vercel
+<img width="1246" height="824" alt="image" src="https://github.com/user-attachments/assets/9d7ad116-f579-4e2e-9cc1-c7b5fb05191f" />
+
 
 ## 👨‍💻 Autor
 
