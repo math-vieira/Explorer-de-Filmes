@@ -7,7 +7,11 @@ export const CentralizerSection = ({
 }: TCentralizerSectionProps) => {
   return (
     <section
-      className={cn('mx-auto max-w-[1200px] px-11', 'md:px-3', className)}
+      className={cn(
+        'mx-auto min-h-[100vh] max-w-[1200px] px-11 pt-20',
+        'md:px-3',
+        className
+      )}
     >
       {children}
     </section>

@@ -5,7 +5,7 @@ import { FaGithubSquare } from 'react-icons/fa';
 
 export const Header = () => {
   return (
-    <header className="flex w-full items-center justify-between px-5 py-3 shadow-sm">
+    <header className="fixed top-0 left-0 z-10 flex w-full items-center justify-between bg-white px-5 py-3 shadow-sm">
       <Link href="/">
         <Image
           src={logo.src}
