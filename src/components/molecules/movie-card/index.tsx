@@ -12,6 +12,7 @@ export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
 
   return (
     <div
+      data-testid="movie-card"
       className="cursor-pointer overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
       onClick={onClick}
       onKeyDown={(e) => {

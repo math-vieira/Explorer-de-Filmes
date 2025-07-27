@@ -1,6 +1,6 @@
 export const LoadingMovies = () => {
   return (
-    <div className="animate-pulse">
+    <div data-testid="loading-skeleton" className="animate-pulse">
       <div className="mb-4 h-96 w-full rounded-lg bg-gray-300"></div>
       <div className="space-y-3">
         <div className="h-6 w-3/4 rounded bg-gray-300"></div>
