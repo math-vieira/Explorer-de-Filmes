@@ -3,7 +3,11 @@ import { MovieCardProps } from './movie-card.types';
 
 export const MovieCard = ({ movie, onClick }: MovieCardProps) => {
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR');
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'Data não disponível';
+    }
+    return date.toLocaleDateString('pt-BR');
   };
 
   return (

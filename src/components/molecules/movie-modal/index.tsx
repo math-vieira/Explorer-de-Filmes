@@ -10,7 +10,11 @@ import { MovieModalProps } from './movie-modal.types';
 
 export const MovieModal = ({ movie, isOpen, onClose }: MovieModalProps) => {
   const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('pt-BR');
+    const date = new Date(dateString);
+    if (isNaN(date.getTime())) {
+      return 'Data não disponível';
+    }
+    return date.toLocaleDateString('pt-BR');
   };
 
   return (
