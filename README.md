@@ -21,6 +21,15 @@ Uma aplicação moderna para explorar filmes populares, construída com Next.js,
 - 📚 **Documentação** com Storybook
 - 🧪 **Testes E2E** com Playwright
 
+---
+
+### 🔐 Segurança da API: uso de Server Actions
+
+> **As requisições à API do TMDB são feitas por meio de Server Actions no Next.js 15**, garantindo que a `API Key` **não fique visível no client-side**.  
+> Isso impede vazamentos, protege a conta na TMDB e segue boas práticas modernas de segurança em aplicações React/Next.
+
+---
+
 ## 🚀 Tecnologias
 
 - **Framework:** Next.js 15.4.4
@@ -225,7 +234,6 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ## Métricas recolhidas a partir do PageSpeed Insights
 <img width="1026" height="820" alt="image" src="https://github.com/user-attachments/assets/cd0d9454-b48a-4fa2-a1df-d2b7fd417709" />
 <img width="1013" height="833" alt="image" src="https://github.com/user-attachments/assets/122b595b-31d7-4fb6-b897-5bc8c33c5db2" />
-
 
 ## 👨‍💻 Autor
 
