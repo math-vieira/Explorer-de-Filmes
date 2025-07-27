@@ -1,6 +1,7 @@
 'use client';
 
 import { SearchBar } from '@/components/atoms/search-bar';
+import { MovieCard } from '@/components/molecules/movie-card';
 import { useGetPopularMovies } from '@/hooks/service-hooks/movies/use-get-popular-movies.hook';
 import { useState } from 'react';
 
@@ -11,15 +12,44 @@ export const HomePage = () => {
     'pt-BR'
   );
 
-  console.log(movies);
+  if (loadingMovies) {
+    return (
+      <div className="pt-10">
+        <SearchBar
+          label="Pesquise por um filme"
+          placeholder="Escreva o nome de um filme"
+        />
+        <div className="mt-8 flex justify-center">
+          <div className="text-lg text-gray-600">Carregando filmes...</div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="pt-10">
-      <SearchBar
-        label="Pesquise por um filme"
-        placeholder="Escreva o nome de um filme"
-      />
-      <ul></ul>
+      <div className="mb-8">
+        <h1 className="mb-6 text-3xl font-bold text-gray-800">
+          Filmes Populares
+        </h1>
+
+        <SearchBar
+          label="Pesquise por um filme"
+          placeholder="Escreva o nome de um filme"
+        />
+      </div>
+
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
+        {movies?.results.map((movie) => (
+          <MovieCard key={movie.id} movie={movie} />
+        ))}
+      </div>
+
+      {movies?.results.length === 0 && (
+        <div className="mt-8 text-center text-gray-600">
+          Nenhum filme encontrado.
+        </div>
+      )}
     </div>
   );
 };

@@ -1,0 +1,48 @@
+import Image from 'next/image';
+import { TMovie } from '@/types/movie.types';
+
+interface MovieCardProps {
+  movie: TMovie;
+}
+
+export const MovieCard = ({ movie }: MovieCardProps) => {
+  const imageUrl = movie.poster_path
+    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+    : '/placeholder-movie.jpg';
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('pt-BR');
+  };
+
+  return (
+    <div className="overflow-hidden rounded-lg bg-white shadow-md transition-shadow duration-300 hover:shadow-lg">
+      <div className="relative">
+        <Image
+          src={imageUrl}
+          alt={movie.title}
+          width={300}
+          height={450}
+          className="h-auto w-full object-cover"
+        />
+        <div className="absolute top-2 right-2 rounded-full bg-yellow-400 px-2 py-1 text-sm font-bold text-black">
+          ⭐ {movie.vote_average.toFixed(1)}
+        </div>
+      </div>
+
+      <div className="p-4">
+        <h3 className="mb-2 line-clamp-2 text-lg font-bold text-gray-800">
+          {movie.title}
+        </h3>
+
+        <p className="mb-3 line-clamp-3 text-sm text-gray-600">
+          {movie.overview}
+        </p>
+
+        <div className="flex items-center justify-between text-sm text-gray-500">
+          <span>{formatDate(movie.release_date)}</span>
+          <span>{movie.vote_count} votos</span>
+        </div>
+      </div>
+    </div>
+  );
+};
