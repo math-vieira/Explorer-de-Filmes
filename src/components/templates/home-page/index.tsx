@@ -5,6 +5,7 @@ import { LoadingMovies } from './components/loading-movies';
 import { MovieCard } from '@/components/molecules/movie-card';
 import { MovieModal } from '@/components/molecules/movie-modal';
 import { useGetPopularMovies } from '@/hooks/service-hooks/movies/use-get-popular-movies.hook';
+import { useDebounce } from '@/hooks/util-hooks/use-debounce.hook';
 import { useState } from 'react';
 import { TMovie } from '@/services/movies/get-popular-movies.service';
 
@@ -14,10 +15,12 @@ export const HomePage = () => {
   const [selectedMovie, setSelectedMovie] = useState<TMovie | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
+  const debouncedSearch = useDebounce(search, 500);
+
   const { data: movies, isPending: loadingMovies } = useGetPopularMovies(
     currentPage,
     'pt-BR',
-    search
+    debouncedSearch
   );
 
   return (
