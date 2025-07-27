@@ -14,5 +14,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: {}
+  render: () => (
+    <div className="w-96">
+      <LoadingMovies />
+    </div>
+  )
 };
