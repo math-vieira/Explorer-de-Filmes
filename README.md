@@ -222,6 +222,10 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 ## Métricas recolhidas a partir do Speed Insights da própria vercel
 <img width="1246" height="824" alt="image" src="https://github.com/user-attachments/assets/9d7ad116-f579-4e2e-9cc1-c7b5fb05191f" />
 
+## Métricas recolhidas a partir do PageSpeed Insights
+<img width="1026" height="820" alt="image" src="https://github.com/user-attachments/assets/cd0d9454-b48a-4fa2-a1df-d2b7fd417709" />
+<img width="1013" height="833" alt="image" src="https://github.com/user-attachments/assets/122b595b-31d7-4fb6-b897-5bc8c33c5db2" />
+
 
 ## 👨‍💻 Autor
 
