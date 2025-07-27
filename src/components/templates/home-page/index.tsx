@@ -4,6 +4,7 @@ import { SearchBar } from '@/components/atoms/search-bar';
 import { LoadingMovies } from './components/loading-movies';
 import { MovieCard } from '@/components/molecules/movie-card';
 import { MovieModal } from '@/components/molecules/movie-modal';
+import { Pagination } from './components/pagination';
 import { useGetPopularMovies } from '@/hooks/service-hooks/movies/use-get-popular-movies.hook';
 import { useDebounce } from '@/hooks/util-hooks/use-debounce.hook';
 import { useState } from 'react';
@@ -64,6 +65,12 @@ export const HomePage = () => {
           Nenhum filme encontrado.
         </div>
       )}
+
+      <Pagination
+        currentPage={currentPage}
+        totalPages={movies?.total_pages || 0}
+        onPageChange={setCurrentPage}
+      />
 
       <MovieModal
         movie={selectedMovie}
