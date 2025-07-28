@@ -59,8 +59,8 @@ pnpm install
 Crie um arquivo `.env` na raiz do projeto:
 
 ```env
-NEXT_PUBLIC_API_URL=https://api.themoviedb.org/3
-NEXT_PUBLIC_API_KEY=sua_api_key_aqui
+API_URL=https://api.themoviedb.org/3
+API_KEY=sua_api_key_aqui
 ```
 
 **Como obter a API key:**
